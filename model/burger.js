@@ -2,14 +2,16 @@ var orm = require("../controller/config/orm.js");
 console.log(orm);
 
 var burger = {
-    selectAll: function (callbback) {
+    selectAll: function (callback) {
         orm.selectAll(function (res) {
-            cb(res);
+            callback(res);
         });
     },
 
     insertOne: function (params, callback) {
-        orm.insertOne(params, function (res) {
+      var duck = params;
+      console.log(duck);
+        orm.insertOne(duck, function (res) {
             callback(res);
         });
     },
@@ -22,3 +24,5 @@ var burger = {
 
 
 };
+
+module.exports = burger;
