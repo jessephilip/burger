@@ -1,5 +1,4 @@
 var orm = require("../controller/config/orm.js");
-console.log(orm);
 
 var burger = {
     selectAll: function (callback) {
@@ -16,13 +15,17 @@ var burger = {
         });
     },
 
-    updateOne: function (params, locCol, locVal, callback) {
-        orm.updateOne(params, locCol, locVal, function (res) {
+    updateOne: function (params, location, callback) {
+        orm.updateOne(params, location, function (res) {
             callback(res);
         });
+    },
+
+    deleteAll: function(callback) {
+      orm.deleteAll(function (res) {
+        callback(res);
+      });
     }
-
-
 };
 
 module.exports = burger;

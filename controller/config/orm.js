@@ -30,21 +30,32 @@ var orm = {
         })
     },
 
-    // updateOne expects params to be an object locCol to be a string, and locVal to be a value
-    updateOne: function(params, locCol, locVal, callback) {
+    // updateOne expects params to be an object and location to be an object
+    // params = {devoured: true}, locCol = id, locVal = 1
+    updateOne: function(params, location, callback) {
         var queryString = "UPDATE burgers SET ";
         for (var key in params) {
-            queryString += key + "=" + '"' + params[key] + '"' + ", ";
+            queryString += key + " = " + params[key];
         }
 
-        queryString += " WHERE " + locCol + " = " + locVal + ";";
-    console.log(queryString);
+        // WHERE id = 2;
+        for (var key in location) {
+            queryString += " WHERE " + key + " = " + location[key] + ";";
+        }
+        console.log(queryString);
 
-    connection.query(queryString, function(err, res) {
-        if (err) throw err;
-        callback(res);
-    });
-}
+        connection.query(queryString, function(err, res) {
+            if (err) throw err;
+            callback(res);
+        });
+    },
+
+    // clears the database of all orders
+    deleteAll: function(callback) {
+      connection.query("DELETE FROM burgers", function(err, result) {
+        console.log(result);
+      });
+    }
 
 }
 

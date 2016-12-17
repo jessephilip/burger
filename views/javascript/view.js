@@ -2,8 +2,8 @@ $("#pushMe").on("click", function(e) {
     e.preventDefault();
     var text = $("#textArea").val().trim();
     var params = {
-      burger_name: text,
-      devoured: false
+        burger_name: text,
+        devoured: false
     };
 
     $.ajax({
@@ -18,19 +18,21 @@ $("#pushMe").on("click", function(e) {
 });
 
 $(document).on("click", ".devourButton", function(e) {
-  console.log($(this).attr("id"));
-  var id = $(this).attr("id");
-  var devoured = true;
+    console.log($(this).attr("id"));
 
-  var params = {
-    id: id,
-    devoured: devoured
-  };
+    var params = {
+        id: {
+            id: $(this).attr("id")
+        },
+        devoured: {
+            devoured: true
+        }
+    };
 
-  $.ajax({
-      type: "POST",
-      url: "/api/update",
-      data: params,
-      dataType: "json"
-  });
+    $.ajax({
+        type: "POST",
+        url: "/api/update",
+        data: params,
+        dataType: "json"
+    });
 });
